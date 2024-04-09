@@ -3,6 +3,7 @@ from openshift.dynamic import DynamicClient
 import kubernetes.config
 import traceback
 import sys
+import datetime
 
 def get_client(**kwargs):
     try:
@@ -27,10 +28,8 @@ def main():
         event_list = v1_events.get()
 
         for event in event_list.items:
-            print(event.metadata.creationTimestamp,"|",event.regarding.kind,"|",event.metadata.name,"|",event.reason)
-#           if event.regarding.kind == "Node":
-#               print(event.metadata.creationTimestamp,"|",event.regarding.kind,"|",event.metadata.name,"|",event.reason)
-
+            print(event.metadata.creationTimestamp,"|",event.regarding.kind,"|",event.metadata.name,"|",event.reason,"|",event.note)
+            
     except Exception as e:
         traceback.print_exc()
 
